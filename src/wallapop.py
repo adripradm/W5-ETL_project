@@ -6,6 +6,15 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 PATH=ChromeDriverManager().install()
+import numpy as np
+from random import randint
+import requests as req
+import pandas as pd
+import time
+from time import sleep
+from bs4 import BeautifulSoup as bs
+from selenium.webdriver.chrome.options import Options
+opciones=Options()
 
 
 def wallapop(url2):
@@ -24,7 +33,7 @@ def wallapop(url2):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     count = 0
-    while count < 80:
+    while count < 200:
         run_script()
         count+=1
         time.sleep(2)
@@ -39,7 +48,7 @@ def wallapop(url2):
     df['precio']=precio
     df['caracteristicas']=combustible
     df.rename(columns={0: "modelo"}, inplace=True)
-    
+    df.to_csv('wallapop.csv')
     
     return df
     
